@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="fragment" type="com.jthou.wanandroidkotlin.fragment.RegisterFragment"/>
+    </data>
+    <LinearLayout
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+        <TextView
+                android:text="@string/app_name"
+                android:layout_gravity="center_horizontal"
+                android:textSize="40sp"
+                android:textColor="@color/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="47dp"
+                android:layout_marginTop="46.5dp"
+                android:background="@drawable/layer_edittext_bg"
+                android:drawableLeft="@drawable/selector_username_ico"
+                android:drawablePadding="12dp"
+                android:ellipsize="end"
+                android:hint="@string/username"
+                android:maxLines="1"
+                android:paddingBottom="19dp"
+                android:singleLine="true"
+                android:textColor="#444444"
+                android:textColorHint="#cccccc"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="16sp"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="47dp"
+                android:background="@drawable/layer_edittext_bg"
+                android:drawableLeft="@drawable/selector_password_ico"
+                android:drawablePadding="12dp"
+                android:ellipsize="end"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingBottom="19dp"
+                android:singleLine="true"
+                android:textColor="#444444"
+                android:textColorHint="#cccccc"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="16sp"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_repassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="47dp"
+                android:background="@drawable/layer_edittext_bg"
+                android:drawableLeft="@drawable/selector_password_ico"
+                android:drawablePadding="12dp"
+                android:ellipsize="end"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingBottom="19dp"
+                android:singleLine="true"
+                android:textColor="#444444"
+                android:textColorHint="#cccccc"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="16sp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_acb_register"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="48dp"
+                android:layout_marginTop="26dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:onClick="@{()->fragment.register()}"
+                android:background="@color/colorPrimary"
+                android:text="@string/register"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+    </LinearLayout>
+</layout>

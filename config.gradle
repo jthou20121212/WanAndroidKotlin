@@ -1,0 +1,31 @@
+ext {
+
+    app = [
+            compileSdkVersion : 28,
+            minSdkVersion : 24,
+            targetSdkVersion : 28,
+            applicationId : "com.jthou.wanandroidkotlin",
+            versionCode : 1,
+            versionName : "1.0"
+    ]
+
+    depend = [
+            ktx : "1.0.2",
+            eventbus : "3.1.1",
+            utilcodex : "1.24.7",
+            rxjava : "2.2.10",
+            rxandroid : "2.1.1",
+            fragmentationx : "1.0.1",
+            fragmentationx_eventbus : "1.1.0",
+            appcompat : "1.0.2",
+            constraintlayout : "1.1.3"
+    ]
+
+    support = [
+            "appcompat" : "androidx.appcompat:appcompat:${depend.appcompat}",
+            "constraintlayout" : "androidx.constraintlayout:constraintlayout:${depend.constraintlayout}"
+    ]
+
+    supportLibs = support.values()
+
+}

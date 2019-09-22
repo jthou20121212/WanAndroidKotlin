@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/black</color>
+    <color name="colorPrimaryDark">#666666</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="tab_bac">#049486</color>
+    <color name="setting_text">#5b5d5c</color>
+    <color name="light_tab_bac">#45c1b5</color>
+
+    <color name="light_deep_red">#f9382a</color>
+    <color name="light_green">#3fc75f</color>
+    <color name="comment_text">#5b5d5c</color>
+    <color name="light_red">#e26d2e</color>
+    <color name="deep_red">#dc3b1f</color>
+    <color name="colorPrimaryOverlay">#00abff</color>
+
+    <color name="gray_ddd">#dddddd</color>
+    <color name="gray_eee">#EEEEEE</color>
+    <color name="gray_666">#FF666666</color>
+
+    <color name="drawer_item_bg_p">#777777</color>
+    <color name="drawer_item_bg_n">@android:color/black</color>
+
+    <color name="shallow_grey">#FF757575</color>
+    <color name="deep_grey">#e6e6e6</color>
+    <color name="title_black">#222222</color>
+
+    <color name="colorBackground">#0F1010</color>
+    <color name="comment_line">#202124</color>
+    <color name="article_background">#444444</color>
+    <color name="item_background">#000000</color>
+    <color name="banner_text_background">#44ffffff</color>
+    <color name="background">@android:color/black</color>
+    <color name="navigation_view_background">@android:color/black</color>
+    <color name="drawer_item_text_color">#dddddd</color>
+    <color name="nav_item_text_color">#cccccc</color>
+    <color name="nav_item_text_color_checked">#444444</color>
+    <color name="image_holder">#F8F8F8</color>
+
+    <color name="delete_text">#62646b</color>
+
+</resources>

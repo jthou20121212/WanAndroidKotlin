@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/normal_view"
+            android:background="@color/colorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:elevation="@dimen/dp_0">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:gravity="center"
+                    android:background="?attr/colorPrimaryDark"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_title"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_18"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/id_smartRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                app:layout_behavior="@string/behavior_appbar_layout">
+
+            <com.scwang.smart.refresh.header.BezierRadarHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"/>
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
