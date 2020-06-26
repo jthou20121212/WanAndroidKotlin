@@ -113,12 +113,17 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding, NavigationVie
 
     override fun onResume() {
         super.onResume()
+        if (EventBus.getDefault().isRegistered(this)) {
+            return
+        }
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this)
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
     }
 
     override fun onDestroyView() {
