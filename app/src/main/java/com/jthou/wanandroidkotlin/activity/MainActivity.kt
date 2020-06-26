@@ -2,12 +2,14 @@ package com.jthou.wanandroidkotlin.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
@@ -19,6 +21,7 @@ import com.jthou.wanandroidkotlin.event.RegisterEvent
 import com.jthou.wanandroidkotlin.event.SearchEvent
 import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.StatusBarUtils
+import com.jthou.wanandroidkotlin.utils.startActivityWithAnimator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -138,9 +141,9 @@ class MainActivity : AppCompatActivity() {
 
     @Subscribe
     fun showSearchList(event: SearchEvent) {
-        val bundle = Intent(this, SearchListActivity::class.java)
-        bundle.putExtra(Constant.ArgumentKey.IT_KEYWORD, event.keyword)
-        startActivity(bundle)
+        val intent = Intent(this, SearchListActivity::class.java)
+        intent.putExtra(Constant.ArgumentKey.IT_KEYWORD, event.keyword)
+        startActivityWithAnimator(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -160,10 +163,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when {
-            mBinding.bottomNavigationView.visibility == View.GONE -> {
-                mBinding.navigationView.menu.forEach { it.isChecked = false }
+            mBinding.drawerLayout.isDrawerOpen(GravityCompat.START) -> {
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START)
                 mBinding.bottomNavigationView.visibility = View.VISIBLE
-                Navigation.findNavController(this, R.id.fragment_container).navigateUp()
             }
             else -> super.onBackPressed()
         }
