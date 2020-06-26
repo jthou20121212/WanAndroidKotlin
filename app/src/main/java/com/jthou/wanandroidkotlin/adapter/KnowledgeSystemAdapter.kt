@@ -2,14 +2,17 @@ package com.jthou.wanandroidkotlin.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.database.AbstractCursor
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ActivityUtils
 import com.jthou.wanandroidkotlin.activity.KnowledgeSystemDetailActivity
 import com.jthou.wanandroidkotlin.data.entity.KnowledgeSystem
 import com.jthou.wanandroidkotlin.databinding.ItemKnowledgeSystemBinding
 import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.listen
+import com.jthou.wanandroidkotlin.utils.startActivityWithAnimator
 import com.jthou.wanandroidkotlin.viewholder.KnowledgeSystemViewHolder
 
 /**
@@ -33,7 +36,8 @@ class KnowledgeSystemAdapter constructor(val context: Context, val data: List<Kn
             .listen { position, _ ->
                 val intent = Intent(context, KnowledgeSystemDetailActivity::class.java)
                 intent.putExtra(Constant.ArgumentKey.IT_KNOWLEDGE_HIERARCHY, data[position])
-                context.startActivity(intent)
+                val activity = ActivityUtils.getActivityByContext(context)
+                activity.startActivityWithAnimator(intent)
             }
     }
 

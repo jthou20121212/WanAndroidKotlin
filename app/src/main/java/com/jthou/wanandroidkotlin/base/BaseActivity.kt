@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.jthou.wanandroidkotlin.R
 import com.jthou.wanandroidkotlin.viewmodel.DefaultViewModel
 import com.jthou.wanandroidkotlin.viewmodel.DefaultViewModelFactory
 
@@ -36,5 +37,10 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatAct
     }
 
     abstract fun resource() : Int
+
+    override fun finish() {
+        super.finish()
+        super.overridePendingTransition(R.anim.activity_exit_slide_in, R.anim.activity_exit_slide_out)
+    }
 
 }

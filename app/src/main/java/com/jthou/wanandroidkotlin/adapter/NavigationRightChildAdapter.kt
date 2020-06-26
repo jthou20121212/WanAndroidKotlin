@@ -1,10 +1,16 @@
 package com.jthou.wanandroidkotlin.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ActivityUtils
+import com.jthou.wanandroidkotlin.activity.ArticleDetailActivity
 import com.jthou.wanandroidkotlin.data.entity.Article
 import com.jthou.wanandroidkotlin.databinding.ItemNavigationRightChildBinding
+import com.jthou.wanandroidkotlin.utils.Constant
+import com.jthou.wanandroidkotlin.utils.listen
+import com.jthou.wanandroidkotlin.utils.startActivityWithAnimator
 import com.jthou.wanandroidkotlin.viewholder.NavigationRightChildViewHolder
 
 /**
@@ -29,5 +35,16 @@ class NavigationRightChildAdapter(val data: List<Article>) : RecyclerView.Adapte
                 parent,
                 false
             )
-        )
+        ).listen { position, _ ->
+            val article = data[position]
+            article.apply {
+                val intent = Intent(parent.context, ArticleDetailActivity::class.java)
+                intent.putExtra(Constant.ArgumentKey.ARTICLE_LINK, link)
+                intent.putExtra(Constant.ArgumentKey.ARTICLE_TITLE, title)
+                intent.putExtra(Constant.ArgumentKey.ARTICLE_ID, article.id)
+                intent.putExtra(Constant.ArgumentKey.ARTICLE_IS_FAVORITE, article.collect)
+                val activity = ActivityUtils.getActivityByContext(parent.context)
+                activity?.startActivityWithAnimator(intent)
+            }
+        }
 }

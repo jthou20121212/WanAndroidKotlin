@@ -16,7 +16,8 @@ import kotlinx.android.synthetic.main.item_navigation_right.view.*
 class NavigationRightViewHolder constructor(viewBinding : ItemNavigationRightBinding) : BaseViewHolder<Navigation>(viewBinding) {
 
     override fun bind(item: Navigation) {
-            itemView.apply {
+        super.bind(item)
+        itemView.apply {
                 recyclerView.layoutManager = FlexboxLayoutManager(mContext)
                 recyclerView.adapter = NavigationRightChildAdapter(item.articles)
             }

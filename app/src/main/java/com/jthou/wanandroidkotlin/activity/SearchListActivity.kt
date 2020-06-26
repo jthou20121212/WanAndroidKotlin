@@ -13,7 +13,6 @@ import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.StatusBarUtils
 import com.jthou.wanandroidkotlin.viewmodel.Provider
 import com.jthou.wanandroidkotlin.viewmodel.SearchListViewModel
-import kotlinx.android.synthetic.main.activity_search_list.*
 
 /**
  * 搜索列表页
@@ -32,10 +31,10 @@ class SearchListActivity : BaseActivity<ActivitySearchListBinding, SearchListVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tv_title.text = HtmlCompat.fromHtml(intent.getStringExtra(Constant.ArgumentKey.IT_KEYWORD), HtmlCompat.FROM_HTML_MODE_LEGACY)
-        toolbar.title = getString(R.string.blank_one)
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener {
+        mDataBinding.tvTitle.text = HtmlCompat.fromHtml(intent.getStringExtra(Constant.ArgumentKey.IT_KEYWORD), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        mDataBinding.toolbar.title = getString(R.string.blank_one)
+        setSupportActionBar(mDataBinding.toolbar)
+        mDataBinding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
         StatusBarUtils.setStatusColor(window, ContextCompat.getColor(this@SearchListActivity, R.color.colorPrimary), 1f)

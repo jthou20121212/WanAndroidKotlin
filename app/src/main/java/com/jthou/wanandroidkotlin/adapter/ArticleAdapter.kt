@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.blankj.utilcode.util.ActivityUtils
 import com.jthou.wanandroidkotlin.activity.ArticleDetailActivity
 import com.jthou.wanandroidkotlin.data.entity.Article
 import com.jthou.wanandroidkotlin.databinding.ItemArticleBinding
 import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.listen
+import com.jthou.wanandroidkotlin.utils.startActivityWithAnimator
 import com.jthou.wanandroidkotlin.viewholder.ArticleViewHolder
 import com.jthou.wanandroidkotlin.viewholder.BaseViewHolder
 
@@ -25,14 +27,15 @@ class ArticleAdapter : PagedListAdapter<Article, BaseViewHolder<Article>>(diffCa
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Article> {
         return ArticleViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)).listen { position, _ ->
-            val intent = Intent(parent.context, ArticleDetailActivity::class.java)
             val article = getItem(position)
             article?.apply {
+                val intent = Intent(parent.context, ArticleDetailActivity::class.java)
                 intent.putExtra(Constant.ArgumentKey.ARTICLE_LINK, link)
                 intent.putExtra(Constant.ArgumentKey.ARTICLE_TITLE, title)
                 intent.putExtra(Constant.ArgumentKey.ARTICLE_ID, article.id)
                 intent.putExtra(Constant.ArgumentKey.ARTICLE_IS_FAVORITE, article.collect)
-                ContextCompat.startActivity(parent.context, intent, null)
+                val activity = ActivityUtils.getActivityByContext(parent.context)
+                activity?.startActivityWithAnimator(intent)
             }
         }
     }

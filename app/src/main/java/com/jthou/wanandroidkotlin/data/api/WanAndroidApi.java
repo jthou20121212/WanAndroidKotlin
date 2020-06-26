@@ -53,7 +53,7 @@ public interface WanAndroidApi {
 
     @POST("lg/uncollect_originId/{id}/json")
     Observable<AbstractResponse<String>> cancelFavoriteArticle(@Path("id") int articleId);
-//
+
     @POST("user/register")
     @FormUrlEncoded
     Observable<RegisterData> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
