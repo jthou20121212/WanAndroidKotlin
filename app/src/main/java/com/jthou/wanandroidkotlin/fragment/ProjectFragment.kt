@@ -33,7 +33,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         mDataBinding.recyclerView.adapter = mAdapter
 
         mDataBinding.tabLayout.apply {
-            mViewModel.getProjectType().observe(this@ProjectFragment, Observer { it ->
+            mViewModel.getProjectType().observe(viewLifecycleOwner, Observer { it ->
                 it.data?.forEach {
                     addTab(newTab().setText(HtmlCompat.fromHtml(it.name, HtmlCompat.FROM_HTML_MODE_LEGACY)).setTag(it))
                 }
@@ -48,7 +48,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     tab?.apply {
                         val project = tag as? Project ?: return
-                        mViewModel.getProjectList(project.id).observe(this@ProjectFragment, Observer {
+                        mViewModel.getProjectList(project.id).observe(viewLifecycleOwner, Observer {
                             mAdapter.submitList(it)
                         })
                     }

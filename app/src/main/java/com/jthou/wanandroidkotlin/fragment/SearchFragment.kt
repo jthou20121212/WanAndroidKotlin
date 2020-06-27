@@ -40,7 +40,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         mDataBinding.recyclerView.layoutManager = FlexboxLayoutManager(context)
         val data: MutableList<HotSearch> = ArrayList()
         mDataBinding.recyclerView.adapter = HotSearchAdapter(data)
-        mViewModel.getHotSearchList().observe(this, Observer { it ->
+        mViewModel.getHotSearchList().observe(viewLifecycleOwner, Observer { it ->
             it.data?.let {
                 data.addAll(it)
                 mDataBinding.recyclerView.adapter?.notifyDataSetChanged()

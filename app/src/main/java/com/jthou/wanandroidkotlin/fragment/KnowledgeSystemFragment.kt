@@ -35,9 +35,9 @@ class KnowledgeSystemFragment : BaseFragment<FragmentKnowledgeSystemBinding, Kno
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(context)
 
         val data: MutableList<KnowledgeSystem> = ArrayList()
-        val adapter = KnowledgeSystemAdapter(context!!, data)
+        val adapter = KnowledgeSystemAdapter(requireContext(), data)
         mDataBinding.recyclerView.adapter = adapter
-        mViewModel.getKnowledgeSystemList().observe(this, Observer { it ->
+        mViewModel.getKnowledgeSystemList().observe(viewLifecycleOwner, Observer { it ->
             it.data.let {
                 data.addAll(it!!)
                 adapter.notifyDataSetChanged()

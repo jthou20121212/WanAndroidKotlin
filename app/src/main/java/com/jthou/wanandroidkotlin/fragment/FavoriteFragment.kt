@@ -37,7 +37,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         mDataBinding.recyclerView.adapter = adapter
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        mViewModel.getFavoriteList().observe(this, androidx.lifecycle.Observer {
+        mViewModel.getFavoriteList().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.submitList(it)
         })
     }

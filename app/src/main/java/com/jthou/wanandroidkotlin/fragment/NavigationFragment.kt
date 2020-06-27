@@ -101,7 +101,7 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding, NavigationVie
 
             }))
         }
-        mViewModel.getNavigationData().observe(this, Observer { it ->
+        mViewModel.getNavigationData().observe(viewLifecycleOwner, Observer { it ->
             it.data?.let {
                 mLeftData.addAll(it)
                 mLeftAdapter.notifyDataSetChanged()

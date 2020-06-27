@@ -51,11 +51,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         viewPager.pageMargin = 20
         viewPager.offscreenPageLimit = 3
 
-        mViewModel.getArticleList().observe(this, Observer { adapter.submitList(it) })
+        mViewModel.getArticleList().observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
 
-        mViewModel.getBannerList().observe(this, Observer {
-            it.data?.let {
-                setupHeader(it)
+        mViewModel.getBannerList().observe(viewLifecycleOwner, Observer {
+            it.data?.let { bannerList->
+                setupHeader(bannerList)
             }
         })
     }

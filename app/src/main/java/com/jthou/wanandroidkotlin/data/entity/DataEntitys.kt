@@ -62,7 +62,7 @@ data class KnowledgeSystem(
     val children: MutableList<KnowledgeSystemChild>,
     val courseId: Int,
     val id: Int,
-    val name: String,
+    val name: String?,
     val order: Int,
     val parentChapterId: Int,
     val visible: Int
@@ -78,7 +78,7 @@ data class KnowledgeSystem(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeList(children)
+        parcel.writeList(children as List<*>?)
         parcel.writeInt(courseId)
         parcel.writeInt(id)
         parcel.writeString(name)
@@ -106,7 +106,7 @@ data class KnowledgeSystemChild(
     val children: List<Any>,
     val courseId: Int,
     val id: Int,
-    val name: String,
+    val name: String?,
     val order: Int,
     val parentChapterId: Int,
     val visible: Int

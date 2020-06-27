@@ -80,7 +80,7 @@ class Preference<T> (val name: String, val default: T) {
 
     @Suppress("UNCHECKED_CAST")
     private fun getSharedPreferences(name: String, default: T): T = with(prefs) {
-        val res: Any = when (default) {
+        val res: Any? = when (default) {
             is Long -> getLong(name, default)
             is String -> getString(name, default)
             is Int -> getInt(name, default)
@@ -126,7 +126,7 @@ class Preference<T> (val name: String, val default: T) {
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IOException::class, ClassNotFoundException::class)
-    private fun <A> deSerialization(str: String): A {
+    private fun <A> deSerialization(str: String?): A? {
         val redStr = java.net.URLDecoder.decode(str, "UTF-8")
         val byteArrayInputStream = ByteArrayInputStream(
             redStr.toByteArray(charset("ISO-8859-1")))

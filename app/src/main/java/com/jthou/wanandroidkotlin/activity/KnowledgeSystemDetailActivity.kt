@@ -16,6 +16,7 @@ import com.jthou.wanandroidkotlin.utils.StatusBarUtils
 import com.jthou.wanandroidkotlin.viewmodel.KnowledgeSystemListViewModel
 import com.jthou.wanandroidkotlin.viewmodel.Provider
 import kotlinx.android.synthetic.main.activity_knowledge_system_detail.*
+import java.util.*
 
 
 /**
@@ -60,7 +61,7 @@ class KnowledgeSystemDetailActivity :
         })
         val children = knowledgeSystem.children
         for (k in children) {
-            tabLayout.addTab(tabLayout.newTab().setText(k.name.toLowerCase()).setTag(k))
+            tabLayout.addTab(tabLayout.newTab().setText(k.name?.toLowerCase(Locale.getDefault())).setTag(k))
         }
         tabLayout.getTabAt(0)?.select()
 

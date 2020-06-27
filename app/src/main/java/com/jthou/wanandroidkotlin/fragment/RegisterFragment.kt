@@ -40,7 +40,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         val username = mDataBinding.etUsername.text.toString()
         val password = mDataBinding.etPassword.text.toString()
         val repassword = mDataBinding.etRepassword.text.toString()
-        if (username.isNullOrEmpty() || password.isNullOrEmpty() || repassword.isNullOrEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || repassword.isEmpty()) {
             SnackbarUtils.with(mDataBinding.root.rootView).setBottomMargin(BarUtils.getNavBarHeight()).setMessage(getString(
                 R.string.account_password_null_tint)).show()
             return

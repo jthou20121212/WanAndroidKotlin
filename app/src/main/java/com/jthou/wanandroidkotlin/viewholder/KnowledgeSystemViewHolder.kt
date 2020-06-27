@@ -23,7 +23,7 @@ class KnowledgeSystemViewHolder(viewBinding: ItemKnowledgeSystemBinding) :
             tv_title.setTextColor(CommonUtils.randomColor())
             val blank = itemView.context.getString(R.string.blank_three)
 
-            val content = item.children.joinToString(separator = blank) { it.name }
+            val content = item.children.joinToString(separator = blank) { it.name ?: "" }
             tv_content.text = content
         }
     }

@@ -37,9 +37,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mDataBinding.apply {
-            mViewModel.isAutoCache().observe(this@SettingFragment, Observer { cbSettingCache.isChecked = it })
-            mViewModel.isNightMode().observe(this@SettingFragment, Observer { cbSettingNight.isChecked = it })
-            mViewModel.isNoImageMode().observe(this@SettingFragment, Observer { cbSettingImage.isChecked = it })
+            mViewModel.isAutoCache().observe(viewLifecycleOwner, Observer { cbSettingCache.isChecked = it })
+            mViewModel.isNightMode().observe(viewLifecycleOwner, Observer { cbSettingNight.isChecked = it })
+            mViewModel.isNoImageMode().observe(viewLifecycleOwner, Observer { cbSettingImage.isChecked = it })
         }
     }
 
@@ -65,7 +65,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         val data = Intent(Intent.ACTION_SENDTO)
         data.data = Uri.parse(getString(R.string.email_uri_string))
         data.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_title))
-        if (data.resolveActivity(context!!.packageManager) != null) {
+        if (data.resolveActivity(requireContext().packageManager) != null) {
             startActivity(data)
         }
     }
