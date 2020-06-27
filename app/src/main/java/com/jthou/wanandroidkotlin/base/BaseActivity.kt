@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jthou.wanandroidkotlin.R
+import com.jthou.wanandroidkotlin.activity.SplashActivity
 import com.jthou.wanandroidkotlin.viewmodel.DefaultViewModel
 import com.jthou.wanandroidkotlin.viewmodel.DefaultViewModelFactory
 
@@ -40,6 +41,9 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatAct
 
     override fun finish() {
         super.finish()
+        if (this is SplashActivity) {
+            return
+        }
         super.overridePendingTransition(R.anim.activity_exit_slide_in, R.anim.activity_exit_slide_out)
     }
 

@@ -6,10 +6,6 @@ import retrofit2.http.*;
 
 import java.util.List;
 
-/**
- * Created by user on 2018/5/17.
- */
-
 public interface WanAndroidApi {
 
     String HOST = "https://www.wanandroid.com/";

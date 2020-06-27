@@ -9,24 +9,17 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import kotlin.properties.Delegates
 
-/**
- * Created by chenxz on 2018/4/21.
- */
 class  App : MultiDexApplication() {
 
     companion object {
-        private val TAG = "App"
+        private const val TAG = "App"
 
         var context: Context by Delegates.notNull()
             private set
-
-        lateinit var instance: Application
-
     }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
         context = applicationContext
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
     }

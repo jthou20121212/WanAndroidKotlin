@@ -106,4 +106,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     implementation 'com.just.agentweb:agentweb:4.0.2'
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0' 
+
 }
