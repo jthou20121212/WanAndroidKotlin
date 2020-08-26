@@ -25,19 +25,6 @@ object ViewClick {
     private const val DEFAULT_WINDOW_DURATION = 500L
 
     /**
-     * @param view view
-     * @param l    View.OnClickListener
-     */
-    fun clicks(view: View, l: View.OnClickListener?) {
-        clicks(view, DEFAULT_WINDOW_DURATION)
-            .subscribe(object : BaseObserver<Any>() {
-                override fun onNext(t: Any) {
-                    l?.onClick(view)
-                }
-            })
-    }
-
-    /**
      * @param view         view
      * @param milliseconds n毫秒内不允许点击2次及以上。
      * @return Observable<Void>

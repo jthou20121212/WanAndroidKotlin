@@ -30,7 +30,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         return Provider.loginViewModel()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         mDataBinding = FragmentLoginBinding.inflate(inflater, container, false)
         mDataBinding.fragment = this
         return mDataBinding.root
@@ -40,15 +44,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         val username = mDataBinding.idEtUsername.text.toString()
         val password = mDataBinding.idEtPassword.text.toString()
         if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
-            SnackbarUtils.with(mDataBinding.root.rootView).setBottomMargin(BarUtils.getNavBarHeight()).setMessage(getString(
-                R.string.account_password_null_tint)).show()
+            SnackbarUtils.with(mDataBinding.root.rootView)
+                .setBottomMargin(BarUtils.getNavBarHeight()).setMessage(
+                getString(
+                    R.string.account_password_null_tint
+                )
+            ).show()
             return
         }
         mViewModel
             .login(username, password)
             .observe(this, Observer { it ->
-                it.data?.let {
-                    EventBus.getDefault().post(LoginEvent(it))
+                if (it.data == null) {
+                    it.errorMsg?.let {
+                        SnackbarUtils.with(mDataBinding.root.rootView)
+                            .setBottomMargin(BarUtils.getNavBarHeight()).setMessage(it).show()
+                    }
+                } else {
+                    it.data?.let {
+                        EventBus.getDefault().post(LoginEvent(it))
+                    }
                 }
             })
     }

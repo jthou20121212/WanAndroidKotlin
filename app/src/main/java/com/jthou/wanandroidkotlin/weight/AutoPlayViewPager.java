@@ -26,7 +26,8 @@ public class AutoPlayViewPager extends ViewPager {
 
     public AutoPlayViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(context, new GestureDetector.SimpleOnGestureListener() {
+        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(context,
+                new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 if (mOnItemClickListener != null)

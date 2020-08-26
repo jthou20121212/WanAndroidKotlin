@@ -1,6 +1,7 @@
 package com.jthou.wanandroidkotlin.repository
 
 import com.jthou.wanandroidkotlin.data.DataRepository
+import com.jthou.wanandroidkotlin.data.entity.SearchHistory
 
 /**
  * @author jthou
@@ -10,5 +11,11 @@ import com.jthou.wanandroidkotlin.data.DataRepository
 class SearchRepository internal constructor(private val dataRepository: DataRepository) {
 
     fun getHotSearchList() = dataRepository.getHotSearchList()
+
+    fun getSearchHistoryList() = dataRepository.querySearchHistory()
+
+    fun insertDataSearchHistory(data: SearchHistory) = dataRepository.insertDataSearchHistory(data)
+
+    fun clearSearchHistory() = dataRepository.clearSearchHistory()
 
 }

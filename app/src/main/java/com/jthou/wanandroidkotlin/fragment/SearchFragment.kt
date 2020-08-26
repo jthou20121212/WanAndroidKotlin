@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.jthou.wanandroidkotlin.adapter.HotSearchAdapter
+import com.jthou.wanandroidkotlin.adapter.SearchHistoryAdapter
 import com.jthou.wanandroidkotlin.base.BaseFragment
 import com.jthou.wanandroidkotlin.data.entity.HotSearch
+import com.jthou.wanandroidkotlin.data.entity.SearchHistory
 import com.jthou.wanandroidkotlin.databinding.FragmentSearchBinding
 import com.jthou.wanandroidkotlin.event.SearchEvent
 import com.jthou.wanandroidkotlin.viewmodel.Provider
@@ -30,7 +33,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         return Provider.searchViewModel()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         mDataBinding = FragmentSearchBinding.inflate(inflater, container, false)
         return mDataBinding.root
     }
@@ -42,6 +49,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         mDataBinding.recyclerView.adapter = HotSearchAdapter(data)
         mViewModel.getHotSearchList().observe(viewLifecycleOwner, Observer { it ->
             it.data?.let {
+                data.clear()
                 data.addAll(it)
                 mDataBinding.recyclerView.adapter?.notifyDataSetChanged()
             }
@@ -53,6 +61,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let {
                         EventBus.getDefault().post(SearchEvent(it))
+                        val searchHistory = SearchHistory()
+                        searchHistory.keyword = it
+                        mViewModel.insertDataSearchHistory(searchHistory)
                     }
                     return true
                 }
@@ -62,6 +73,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
                 }
 
             })
+        }
+        mDataBinding.recyclerViewHistory.layoutManager = LinearLayoutManager(context)
+        mDataBinding.recyclerViewHistory.adapter = SearchHistoryAdapter()
+        mViewModel.getSearchHistoryList().observe(viewLifecycleOwner, Observer { data ->
+            (mDataBinding.recyclerViewHistory.adapter as? SearchHistoryAdapter)?.submitList(data)
+        })
+        mDataBinding.searchHistoryClearAllTv.setOnClickListener {
+            mViewModel.clearSearchHistory()
+            val adapter = mDataBinding.recyclerViewHistory.adapter as SearchHistoryAdapter
+            adapter.submitList(null)
         }
     }
 

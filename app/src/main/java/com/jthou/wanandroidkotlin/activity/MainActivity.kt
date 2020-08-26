@@ -166,6 +166,7 @@ class MainActivity : AppCompatActivity() {
                 mBinding.drawerLayout.closeDrawer(GravityCompat.START)
                 mBinding.bottomNavigationView.visibility = View.VISIBLE
             }
+
             else -> super.onBackPressed()
         }
     }

@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'org.greenrobot.greendao'
+
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -33,6 +35,15 @@ android {
     buildFeatures {
         dataBinding = true
     }
+}
+
+greendao {
+    // 数据库的schema版本，也可以理解为数据库版本号
+    schemaVersion 1
+    // 设置DaoMaster、DaoSession、Dao包名，也就是要放置这些类的包的全路径。
+    daoPackage 'com.jthou.wanandroidkotlin.data.db.greendao'
+    // 设置DaoMaster、DaoSession、Dao目录
+    targetGenDir 'src/main/java'
 }
 
 dependencies {
@@ -107,6 +118,9 @@ dependencies {
 
     implementation 'com.just.agentweb:agentweb:4.0.2'
 
-    implementation 'com.facebook.shimmer:shimmer:0.5.0' 
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    implementation 'org.greenrobot:greendao:3.3.0'
+
+    implementation 'me.dkzwm.widget.esl:core:0.0.2'
 }

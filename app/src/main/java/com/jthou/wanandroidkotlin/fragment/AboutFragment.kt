@@ -46,8 +46,4 @@ class AboutFragment : BaseFragment<FragmentAboutBinding, DefaultViewModel>() {
         }
     }
 
-    fun zhouzi() {
-        SnackbarUtils.with(mDataBinding.root.rootView).setBottomMargin(BarUtils.getNavBarHeight()).setMessage(getString(R.string.zhouzi_buchi)).show()
-    }
-
 }

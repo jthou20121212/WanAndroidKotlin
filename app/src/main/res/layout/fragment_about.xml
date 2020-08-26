@@ -90,30 +90,6 @@
                         android:layout_margin="10dp"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
-                        android:onClick="@{()-> fragment.zhouzi()}"
-                        app:cardCornerRadius="2dp"
-                        app:cardElevation="2dp"
-                        app:contentPadding="3dp">
-
-                    <TextView
-                            android:id="@+id/tv_zhouzi"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableEnd="@drawable/ic_alipay"
-                            android:drawablePadding="3dp"
-                            android:padding="10dp"
-                            android:text="@string/zhouzi"
-                            android:textColor="@color/comment_text"
-                            android:textSize="16sp"/>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
                         app:cardCornerRadius="2dp"
                         app:cardElevation="2dp"
                         app:contentPadding="3dp">

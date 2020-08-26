@@ -14,7 +14,7 @@ import com.jthou.wanandroidkotlin.data.sp.SpHelper
  * @version 1.0.0
  * @date 18-08-2019
  */
-class DataRepository(val dbHelper: DbHelper, private val httpHelper: HttpHelper, private val spHelper: SpHelper) : DbHelper, HttpHelper, SpHelper {
+class DataRepository(private val dbHelper: DbHelper, private val httpHelper: HttpHelper, private val spHelper: SpHelper) : DbHelper, HttpHelper, SpHelper {
 
     override fun getBannerList() = httpHelper.getBannerList()
 
@@ -51,5 +51,11 @@ class DataRepository(val dbHelper: DbHelper, private val httpHelper: HttpHelper,
     override fun getProjectType() = httpHelper.getProjectType()
 
     override fun getProjectList(cid: Int) = httpHelper.getProjectList(cid)
+
+    override fun insertDataSearchHistory(data: SearchHistory) = dbHelper.insertDataSearchHistory(data)
+
+    override fun clearSearchHistory() = dbHelper.clearSearchHistory()
+
+    override fun querySearchHistory() = dbHelper.querySearchHistory()
 
 }

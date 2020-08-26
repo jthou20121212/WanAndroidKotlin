@@ -1,15 +1,20 @@
 package com.jthou.wanandroidkotlin.base
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.blankj.utilcode.util.ScreenUtils
 import com.jthou.wanandroidkotlin.R
 import com.jthou.wanandroidkotlin.activity.SplashActivity
 import com.jthou.wanandroidkotlin.viewmodel.DefaultViewModel
 import com.jthou.wanandroidkotlin.viewmodel.DefaultViewModelFactory
+import me.dkzwm.widget.esl.EasySwipeLayout
+import me.dkzwm.widget.esl.EasySwipeManager
+import me.dkzwm.widget.esl.graphics.JIKEDrawer
 
 
 /**
@@ -38,6 +43,19 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatAct
     }
 
     abstract fun resource() : Int
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (this is SplashActivity) {
+            return
+        }
+        val layout: EasySwipeLayout = EasySwipeManager.attach(this)
+        layout.setDurationOfClose(270)
+        layout.setEdgeDiff((ScreenUtils.getScreenWidth() * 0.04f).toInt())
+        layout.setDrawer(JIKEDrawer(this))
+        layout.setDirection(me.dkzwm.widget.esl.config.Constants.DIRECTION_LEFT)
+        layout.setSwipeListener { onBackPressed() }
+    }
 
     override fun finish() {
         super.finish()

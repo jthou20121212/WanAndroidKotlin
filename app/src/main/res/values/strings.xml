@@ -108,6 +108,6 @@
 
     <string name="clear_all">清空</string>
     <string name="history_search">搜索历史</string>
-    <string name="walk_you">走你</string>
+    <string name="walk_you">请输入关键词搜索</string>
 
 </resources>
