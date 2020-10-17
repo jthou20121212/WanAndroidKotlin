@@ -161,12 +161,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        val id = findNavController(R.id.fragment_container).currentDestination?.id
         when {
             mBinding.drawerLayout.isDrawerOpen(GravityCompat.START) -> {
                 mBinding.drawerLayout.closeDrawer(GravityCompat.START)
                 mBinding.bottomNavigationView.visibility = View.VISIBLE
             }
-
+            id != R.id.fragment_main -> {
+                findNavController(R.id.fragment_container).navigate(R.id.action_main)
+                mBinding.navigationView.menu.forEach { it.isChecked = false }
+                mBinding.bottomNavigationView.visibility = View.VISIBLE
+                mBinding.bottomNavigationView.selectedItemId = R.id.tab_home_page
+            }
             else -> super.onBackPressed()
         }
     }
