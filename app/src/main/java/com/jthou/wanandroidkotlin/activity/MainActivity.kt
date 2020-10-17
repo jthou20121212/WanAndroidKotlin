@@ -58,24 +58,20 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.navigationView.apply {
             menu.forEach { it ->
-                it.setOnMenuItemClickListener { it ->
+                it.setOnMenuItemClickListener { menuItem ->
                     mBinding.drawerLayout.closeDrawers()
-                    when (it.itemId) {
+                    when (menuItem.itemId) {
                         R.id.menu_login -> {
-                            Navigation.findNavController(this@MainActivity, R.id.fragment_container)
-                                .navigate(R.id.fragment_login)
+                            findNavController(R.id.fragment_container).navigate(R.id.fragment_login)
                         }
                         R.id.menu_favorite -> {
-                            Navigation.findNavController(this@MainActivity, R.id.fragment_container)
-                                .navigate(R.id.fragment_favorite)
+                            findNavController(R.id.fragment_container).navigate(R.id.fragment_favorite)
                         }
                         R.id.menu_setting -> {
-                            Navigation.findNavController(this@MainActivity, R.id.fragment_container)
-                                .navigate(R.id.fragment_setting)
+                            findNavController(R.id.fragment_container).navigate(R.id.fragment_setting)
                         }
                         R.id.menu_about -> {
-                            Navigation.findNavController(this@MainActivity, R.id.fragment_container)
-                                .navigate(R.id.fragment_about)
+                            findNavController(R.id.fragment_container).navigate(R.id.fragment_about)
                         }
                         R.id.menu_logout -> {
 
@@ -94,34 +90,44 @@ class MainActivity : AppCompatActivity() {
                 it.isChecked = true
                 when (it.itemId) {
                     R.id.tab_home_page -> {
-                        Navigation.findNavController(this, R.id.fragment_container).navigate(R.id.action_main)
+                        findNavController(R.id.fragment_container).navigate(R.id.action_main)
                     }
                     R.id.tab_knowledge_hierarchy -> {
-                        Navigation.findNavController(this, R.id.fragment_container)
-                            .navigate(R.id.action_knowledge_system)
+                        findNavController(R.id.fragment_container).navigate(R.id.action_knowledge_system)
                     }
                     R.id.tab_navigation -> {
-                        Navigation.findNavController(this, R.id.fragment_container).navigate(R.id.action_navigation)
+                        findNavController(R.id.fragment_container).navigate(R.id.action_navigation)
                     }
                     R.id.tab_project -> {
-                        Navigation.findNavController(this, R.id.fragment_container).navigate(R.id.action_project)
+                        findNavController(R.id.fragment_container).navigate(R.id.action_project)
                     }
                 }
             }
 
             false
         }
+
+        findNavController(R.id.fragment_container).currentDestination?.let {
+            if (it.id != R.id.fragment_main) {
+                mBinding.navigationView.menu.forEach { menuItem ->
+                    menuItem.isChecked = menuItem.itemId == R.id.menu_setting
+                }
+                mBinding.bottomNavigationView.visibility = View.GONE
+            }
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when {
             Navigation.findNavController(
                 this,
                 R.id.fragment_container
-            ).currentDestination?.id == R.id.fragment_search -> return super.onOptionsItemSelected(item)
-            item?.itemId == R.id.id_search -> {
+            ).currentDestination?.id == R.id.fragment_search -> return super.onOptionsItemSelected(
+                item
+            )
+            item.itemId == R.id.id_search -> {
                 mBinding.bottomNavigationView.visibility = View.GONE
-                Navigation.findNavController(this, R.id.fragment_container).navigate(R.id.action_search)
+                findNavController(R.id.fragment_container).navigate(R.id.action_search)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -129,13 +135,13 @@ class MainActivity : AppCompatActivity() {
 
     @Subscribe
     fun toRegister(event: RegisterEvent) {
-        Navigation.findNavController(this, R.id.fragment_container).navigate(R.id.action_register)
+        findNavController(R.id.fragment_container).navigate(R.id.action_register)
     }
 
     @Subscribe
     fun onLoginSuccess(event: LoginEvent) {
         mBinding.navigationView.menu.findItem(R.id.menu_login).title = event.loginData.username
-        Navigation.findNavController(this, R.id.fragment_container).navigateUp()
+        findNavController(R.id.fragment_container).navigateUp()
     }
 
     @Subscribe

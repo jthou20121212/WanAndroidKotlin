@@ -20,7 +20,6 @@
     <color name="gray_666">#FF666666</color>
 
     <color name="drawer_item_bg_p">#777777</color>
-    <color name="drawer_item_bg_n">@android:color/black</color>
 
     <color name="shallow_grey">#FF757575</color>
     <color name="deep_grey">#e6e6e6</color>

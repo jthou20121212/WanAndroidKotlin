@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     fun login() {
         val username = mDataBinding.idEtUsername.text.toString()
         val password = mDataBinding.idEtPassword.text.toString()
-        if (username.isNullOrEmpty() || password.isNullOrEmpty()) {
+        if (username.isEmpty() || password.isEmpty()) {
             SnackbarUtils.with(mDataBinding.root.rootView)
                 .setBottomMargin(BarUtils.getNavBarHeight()).setMessage(
                 getString(

@@ -53,11 +53,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
 
     fun nightMode() {
         mViewModel.setNightMode(mDataBinding.cbSettingNight.isChecked)
-        if (mDataBinding.cbSettingImage.isChecked) {
+        if (mDataBinding.cbSettingNight.isChecked)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
+        else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
         activity?.recreate()
     }
 
@@ -65,7 +64,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
         val data = Intent(Intent.ACTION_SENDTO)
         data.data = Uri.parse(getString(R.string.email_uri_string))
         data.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_title))
-        if (data.resolveActivity(requireContext().packageManager) != null) {
+        data.resolveActivity(requireContext().packageManager)?.let {
             startActivity(data)
         }
     }
