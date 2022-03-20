@@ -9,7 +9,7 @@
             android:background="@color/gray_eee">
 
         <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/normal_view"
-                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     xmlns:app="http://schemas.android.com/apk/res"
                                                      android:layout_width="match_parent"
                                                      android:layout_height="match_parent">
 

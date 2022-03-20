@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
  * @version 1.0.0
  * @date 24-08-2019
  */
-abstract class BaseViewHolder<T> (private val viewBinder: ViewDataBinding) : RecyclerView.ViewHolder(viewBinder.root) {
+abstract class BaseViewHolder<T> (private val viewBinding: ViewDataBinding) : RecyclerView.ViewHolder(viewBinding.root) {
 
     var mItem : T? = null
 
     lateinit var mAdapter : RecyclerView.Adapter<out BaseViewHolder<T>>
 
     val mContext: Context by lazy {
-        viewBinder.root.context
+        viewBinding.root.context
     }
 
     @CallSuper

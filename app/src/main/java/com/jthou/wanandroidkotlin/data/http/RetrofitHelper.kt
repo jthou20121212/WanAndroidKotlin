@@ -23,9 +23,9 @@ object RetrofitHelper {
 
     private var retrofit: Retrofit? = null
 
-    val api: WanAndroidApi by lazy { getRetrofit()!!.create(WanAndroidApi::class.java) }
+    val api: WanAndroidApi by lazy { getRetrofit().create(WanAndroidApi::class.java) }
 
-    private fun getRetrofit(): Retrofit? {
+    private fun getRetrofit(): Retrofit {
         if (retrofit == null) {
             synchronized(RetrofitHelper::class.java) {
                 if (retrofit == null) {
@@ -39,7 +39,7 @@ object RetrofitHelper {
                 }
             }
         }
-       return retrofit
+       return retrofit!!
     }
 
     private fun getOkhttpClient(): OkHttpClient {

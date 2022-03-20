@@ -9,8 +9,8 @@ class SearchHistoryViewHolder(viewBinding: ItemSearchHistoryBinding) :
 
     override fun bind(item: SearchHistory) {
         super.bind(item)
-        (itemView as? TextView)?.let {
-            it.text = item.keyword
+        (itemView as? TextView)?.run {
+            text = item.keyword
         }
     }
 

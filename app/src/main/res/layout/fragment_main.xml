@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
 
     </data>
-    <FrameLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray_eee">
 
-        <com.scwang.smart.refresh.layout.SmartRefreshLayout android:id="@+id/normal_view"
-                                                            android:layout_width="match_parent"
-                                                            android:layout_height="match_parent">
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_eee">
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/normal_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <com.scwang.smart.refresh.header.BezierRadarHeader
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <com.google.android.material.appbar.AppBarLayout
-                        app:elevation="0dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:elevation="0dp">
 
                     <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_scrollFlags="scroll"
-                            android:descendantFocusability="blocksDescendants">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants"
+                        app:layout_scrollFlags="scroll">
 
-                        <include xmlns:app="http://schemas.android.com/apk/res-auto"
-                                 layout="@layout/item_banner"/>
+                        <include xmlns:app="http://schemas.android.com/apk/res"
+                            android:id="@+id/include_item_banner"
+                            layout="@layout/item_banner" />
 
                     </FrameLayout>
 
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/background"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        android:overScrollMode="never"/>
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/background"
+                    android:overScrollMode="never"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

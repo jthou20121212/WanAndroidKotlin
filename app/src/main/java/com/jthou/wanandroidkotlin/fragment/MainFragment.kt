@@ -3,16 +3,18 @@ package com.jthou.wanandroidkotlin.fragment
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.blankj.utilcode.util.ConvertUtils
+import com.blankj.utilcode.util.ScreenUtils
 import com.bumptech.glide.Glide
 import com.jthou.wanandroidkotlin.R
 import com.jthou.wanandroidkotlin.activity.ArticleDetailActivity
@@ -20,11 +22,12 @@ import com.jthou.wanandroidkotlin.adapter.ArticleAdapter
 import com.jthou.wanandroidkotlin.base.BaseFragment
 import com.jthou.wanandroidkotlin.data.entity.Banner
 import com.jthou.wanandroidkotlin.databinding.FragmentMainBinding
+import com.jthou.wanandroidkotlin.databinding.ItemBannerBinding
 import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.Injection
 import com.jthou.wanandroidkotlin.viewmodel.MainViewModel
 import com.jthou.wanandroidkotlin.viewmodel.Provider
-import kotlinx.android.synthetic.main.item_banner.*
+import kotlin.math.roundToInt
 
 /**
  *
@@ -35,9 +38,18 @@ import kotlinx.android.synthetic.main.item_banner.*
  */
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
+    companion object {
+        private const val TAG = "MainFragment"
+    }
+
+    private val bannerDataBinding by lazy {
+        // ItemBannerBinding.bind(mDataBinding.root)
+        mDataBinding.includeItemBanner
+    }
+
     override fun createViewModel() = Provider.mainViewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mDataBinding = FragmentMainBinding.inflate(inflater, container, false)
         return mDataBinding.root
     }
@@ -48,20 +60,26 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         mDataBinding.recyclerView.adapter = adapter
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        viewPager.pageMargin = 20
-        viewPager.offscreenPageLimit = 3
+        val width = ScreenUtils.getScreenWidth() - ConvertUtils.dp2px(20f)
+        val height = (width / 16f * 9).roundToInt()
+        bannerDataBinding.viewPager.layoutParams.width = width
+        bannerDataBinding.viewPager.layoutParams.height = height
+        bannerDataBinding.viewPager.pageMargin = 20
+        bannerDataBinding.viewPager.offscreenPageLimit = 3
 
-        mViewModel.getArticleList().observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        mViewModel.getArticleList().observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
-        mViewModel.getBannerList().observe(viewLifecycleOwner, Observer {
+        mViewModel.getBannerList().observe(viewLifecycleOwner) {
             it.data?.let { bannerList->
                 setupHeader(bannerList)
             }
-        })
+        }
     }
 
     private fun setupHeader(data : List<Banner>) {
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        bannerDataBinding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
@@ -70,15 +88,15 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
                 if (!isAdded) return
                 if (data.isEmpty()) return
                 val index = position % data.size
-                tv_title.text = data[index].title
-                tv_index.text = getString(R.string.index_count, index + 1, data.size)
+                bannerDataBinding.tvTitle.text = data[index].title
+                bannerDataBinding.tvIndex.text = getString(R.string.index_count, index + 1, data.size)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
 
             }
         })
-        viewPager.setOnItemClickListener { position ->
+        bannerDataBinding.viewPager.setOnItemClickListener { position ->
             val index = position % data.size
             val intent = Intent(context, ArticleDetailActivity::class.java)
             intent.putExtra(Constant.ArgumentKey.IT_IS_BANNER, true)
@@ -98,10 +116,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
             @NonNull
             override fun instantiateItem(@NonNull container: ViewGroup, position: Int): Any {
-                val imageView = AppCompatImageView(context)
+                val contextNon = context ?: return Any()
+                val imageView = AppCompatImageView(contextNon)
                 if (!Injection.getDataRepository().isNoImageMode().value!!) {
                     Glide
-                        .with(context!!)
+                        .with(contextNon)
                         .load(data[position].imagePath)
                         .centerCrop()
                         .placeholder(ColorDrawable(ContextCompat.getColor(context!!, R.color.image_holder)))
@@ -116,8 +135,8 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             }
 
         }
-        viewPager.adapter = adapter
-        viewPager.startAutoPlay()
+        bannerDataBinding.viewPager.adapter = adapter
+        bannerDataBinding.viewPager.startAutoPlay()
     }
 
 }

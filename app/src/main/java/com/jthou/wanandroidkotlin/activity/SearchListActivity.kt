@@ -31,7 +31,9 @@ class SearchListActivity : BaseActivity<ActivitySearchListBinding, SearchListVie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mDataBinding.tvTitle.text = HtmlCompat.fromHtml(intent.getStringExtra(Constant.ArgumentKey.IT_KEYWORD), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        intent.getStringExtra(Constant.ArgumentKey.IT_KEYWORD)?.let {
+            mDataBinding.tvTitle.text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        }
         mDataBinding.toolbar.title = getString(R.string.blank_one)
         setSupportActionBar(mDataBinding.toolbar)
         mDataBinding.toolbar.setNavigationOnClickListener {

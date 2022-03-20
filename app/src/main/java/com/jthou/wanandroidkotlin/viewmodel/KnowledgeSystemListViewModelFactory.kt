@@ -13,7 +13,7 @@ import com.jthou.wanandroidkotlin.repository.KnowledgeSystemListRepository
  */
 class KnowledgeSystemListViewModelFactory(private val repository : KnowledgeSystemListRepository) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return KnowledgeSystemListViewModel(repository) as T
     }
 

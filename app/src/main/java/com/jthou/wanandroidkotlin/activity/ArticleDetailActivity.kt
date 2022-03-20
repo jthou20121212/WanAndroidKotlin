@@ -27,11 +27,11 @@ class ArticleDetailActivity : BaseActivity<ActivityArticleDetailBinding, Default
         intent.getIntExtra(Constant.ArgumentKey.ARTICLE_ID, 0)
     }
 
-    private val mLink: String by lazy {
+    private val mLink: String? by lazy {
         intent.getStringExtra(Constant.ArgumentKey.ARTICLE_LINK)
     }
 
-    private val mTitle: String by lazy {
+    private val mTitle: String? by lazy {
         intent.getStringExtra(Constant.ArgumentKey.ARTICLE_TITLE)
     }
 
@@ -41,7 +41,9 @@ class ArticleDetailActivity : BaseActivity<ActivityArticleDetailBinding, Default
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mDataBinding.toolbar.apply {
-            title = HtmlCompat.fromHtml(mTitle, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            mTitle?.let {
+                title = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            }
             setSupportActionBar(this)
             setNavigationOnClickListener {
                 onBackPressed()

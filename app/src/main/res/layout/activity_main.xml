@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
     <data>
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
@@ -31,13 +32,13 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <fragment
-                    android:id="@+id/fragment_container"
-                    app:navGraph="@navigation/navigation_main"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
-                    android:layout_width="match_parent"
-                    app:layout_behavior="@string/behavior_appbar_layout"
-                    android:layout_height="match_parent"/>
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container"
+                app:navGraph="@navigation/navigation_main"
+                app:layout_behavior="@string/behavior_appbar_layout"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottomNavigationView"

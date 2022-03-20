@@ -13,7 +13,7 @@ import com.jthou.wanandroidkotlin.repository.SettingRepository
  */
 class SettingViewModelFactory(private val repository : SettingRepository) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T >): T {
         return SettingViewModel(repository) as T
     }
 

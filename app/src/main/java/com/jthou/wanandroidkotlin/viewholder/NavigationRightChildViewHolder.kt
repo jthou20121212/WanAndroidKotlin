@@ -16,6 +16,7 @@ class NavigationRightChildViewHolder constructor(viewBinding: ItemNavigationRigh
     BaseViewHolder<Article>(viewBinding) {
 
     override fun bind(item: Article) {
+        super.bind(item)
         val textView = itemView as? TextView ?: return
         textView.text = item.title
         textView.setTextColor(CommonUtils.randomColor())

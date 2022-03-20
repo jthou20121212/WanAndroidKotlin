@@ -15,7 +15,6 @@ import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.StatusBarUtils
 import com.jthou.wanandroidkotlin.viewmodel.KnowledgeSystemListViewModel
 import com.jthou.wanandroidkotlin.viewmodel.Provider
-import kotlinx.android.synthetic.main.activity_knowledge_system_detail.*
 import java.util.*
 
 
@@ -39,13 +38,16 @@ class KnowledgeSystemDetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val knowledgeSystem = intent.getParcelableExtra<KnowledgeSystem>(Constant.ArgumentKey.IT_KNOWLEDGE_HIERARCHY)
-        mDataBinding.toolbar.title = knowledgeSystem.name
+        mDataBinding.toolbar.title = knowledgeSystem?.name
         setSupportActionBar(mDataBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         StatusBarUtils.setStatusColor(window, ContextCompat.getColor(this, com.jthou.wanandroidkotlin.R.color.colorPrimary), 1f)
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//        lifecycleScope.launch {  }
+//        lifecycleScope.launchWhenCreated {  }
+
+        mDataBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }
@@ -59,19 +61,20 @@ class KnowledgeSystemDetailActivity :
             }
 
         })
-        val children = knowledgeSystem.children
-        for (k in children) {
-            tabLayout.addTab(tabLayout.newTab().setText(k.name?.toLowerCase(Locale.getDefault())).setTag(k))
+        knowledgeSystem?.let {
+            val children = it.children
+            for (k in children) {
+                mDataBinding.tabLayout.addTab(mDataBinding.tabLayout.newTab().setText(k.name?.toLowerCase(Locale.getDefault())).setTag(k))
+            }
+            mDataBinding.tabLayout.getTabAt(0)?.select()
+
+            fetchData(it.children[0].id)
         }
-        tabLayout.getTabAt(0)?.select()
 
         mAdapter = ArticleAdapter()
         mDataBinding.recyclerView.adapter = mAdapter
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(this)
         (mDataBinding.recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-
-
-        fetchData(knowledgeSystem.children[0].id)
     }
 
     private fun fetchData(cid: Int) {

@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:startDestination="@+id/fragment_main"
-            android:id="@+id/navigation_res">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/navigation_fragment_main">
 
-    <fragment android:id="@+id/fragment_main"
-              android:name="com.jthou.wanandroidkotlin.fragment.MainFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_main"
+        android:name="com.jthou.wanandroidkotlin.fragment.MainFragment"
+        android:label="去你大爷的" />
 
-    <fragment android:id="@+id/fragment_knowledge_system"
-              android:name="com.jthou.wanandroidkotlin.fragment.KnowledgeSystemFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_knowledge_system"
+        android:name="com.jthou.wanandroidkotlin.fragment.KnowledgeSystemFragment" />
 
-    <fragment android:id="@+id/fragment_navigation"
-              android:name="com.jthou.wanandroidkotlin.fragment.NavigationFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_navigation"
+        android:name="com.jthou.wanandroidkotlin.fragment.NavigationFragment" />
 
-    <fragment android:id="@+id/fragment_project"
-              android:name="com.jthou.wanandroidkotlin.fragment.ProjectFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_project"
+        android:name="com.jthou.wanandroidkotlin.fragment.ProjectFragment" />
 
-    <fragment android:id="@+id/fragment_about"
-              android:name="com.jthou.wanandroidkotlin.fragment.AboutFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_about"
+        android:name="com.jthou.wanandroidkotlin.fragment.AboutFragment" />
 
-    <fragment android:id="@+id/fragment_setting"
-              android:name="com.jthou.wanandroidkotlin.fragment.SettingFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_setting"
+        android:name="com.jthou.wanandroidkotlin.fragment.SettingFragment" />
 
-    <fragment android:id="@+id/fragment_login"
-              android:name="com.jthou.wanandroidkotlin.fragment.LoginFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_login"
+        android:name="com.jthou.wanandroidkotlin.fragment.LoginFragment" />
 
-    <fragment android:id="@+id/fragment_register"
-              android:name="com.jthou.wanandroidkotlin.fragment.RegisterFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_register"
+        android:name="com.jthou.wanandroidkotlin.fragment.RegisterFragment" />
 
-    <fragment android:id="@+id/fragment_favorite"
-              android:name="com.jthou.wanandroidkotlin.fragment.FavoriteFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_favorite"
+        android:name="com.jthou.wanandroidkotlin.fragment.FavoriteFragment" />
 
-    <fragment android:id="@+id/fragment_search"
-              android:name="com.jthou.wanandroidkotlin.fragment.SearchFragment"/>
+    <fragment
+        android:id="@+id/navigation_fragment_search"
+        android:name="com.jthou.wanandroidkotlin.fragment.SearchFragment" />
 
-    <action android:id="@+id/action_main" app:destination="@+id/fragment_main" />
-    <action android:id="@+id/action_knowledge_system" app:destination="@+id/fragment_knowledge_system" />
-    <action android:id="@+id/action_navigation" app:destination="@+id/fragment_navigation" />
-    <action android:id="@+id/action_project" app:destination="@+id/fragment_project" />
-    <action android:id="@+id/action_about" app:destination="@+id/fragment_about" />
-    <action android:id="@+id/action_setting" app:destination="@+id/fragment_setting" />
-    <action android:id="@+id/action_login" app:destination="@+id/fragment_login" />
-    <action android:id="@+id/action_register" app:destination="@+id/fragment_register" />
-    <action android:id="@+id/action_favorite" app:destination="@+id/fragment_favorite" />
-    <action android:id="@+id/action_search" app:destination="@+id/fragment_search" />
+        <action android:id="@+id/action_main" app:destination="@+id/navigation_fragment_main" />
+        <action android:id="@+id/action_knowledge_system" app:destination="@+id/navigation_fragment_knowledge_system" />
+        <action android:id="@+id/action_navigation" app:destination="@+id/navigation_fragment_navigation" />
+        <action android:id="@+id/action_project" app:destination="@+id/navigation_fragment_project" />
+        <action android:id="@+id/action_about" app:destination="@+id/navigation_fragment_about" />
+        <action android:id="@+id/action_setting" app:destination="@+id/navigation_fragment_setting" />
+        <action android:id="@+id/action_login" app:destination="@+id/navigation_fragment_login" />
+        <action android:id="@+id/action_register" app:destination="@+id/navigation_fragment_register" />
+        <action android:id="@+id/action_favorite" app:destination="@+id/navigation_fragment_favorite" />
+        <action android:id="@+id/action_search" app:destination="@+id/navigation_fragment_search" />
 
 </navigation>

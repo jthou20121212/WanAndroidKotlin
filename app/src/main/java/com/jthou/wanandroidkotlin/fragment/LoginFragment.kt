@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.SnackbarUtils
@@ -34,7 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mDataBinding = FragmentLoginBinding.inflate(inflater, container, false)
         mDataBinding.fragment = this
         return mDataBinding.root
@@ -54,7 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         }
         mViewModel
             .login(username, password)
-            .observe(this, Observer { it ->
+            .observe(this, { it ->
                 if (it.data == null) {
                     it.errorMsg?.let {
                         SnackbarUtils.with(mDataBinding.root.rootView)

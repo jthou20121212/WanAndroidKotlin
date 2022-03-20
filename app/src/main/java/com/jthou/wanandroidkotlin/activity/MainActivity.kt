@@ -2,6 +2,7 @@ package com.jthou.wanandroidkotlin.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.core.view.forEach
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.jthou.wanandroidkotlin.R
 import com.jthou.wanandroidkotlin.databinding.ActivityMainBinding
 import com.jthou.wanandroidkotlin.event.LoginEvent
@@ -21,7 +23,6 @@ import com.jthou.wanandroidkotlin.event.SearchEvent
 import com.jthou.wanandroidkotlin.utils.Constant
 import com.jthou.wanandroidkotlin.utils.StatusBarUtils
 import com.jthou.wanandroidkotlin.utils.startActivityWithAnimator
-import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mBinding.toolbar)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
@@ -48,12 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         mDrawerListener = object : ActionBarDrawerToggle(
             this,
-            drawerLayout,
-            toolbar,
+            mBinding.drawerLayout,
+            mBinding.toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         ) {}
-        drawerLayout.addDrawerListener(mDrawerListener)
+        mBinding.drawerLayout.addDrawerListener(mDrawerListener)
         mDrawerListener.syncState()
 
         mBinding.navigationView.apply {
@@ -62,16 +63,16 @@ class MainActivity : AppCompatActivity() {
                     mBinding.drawerLayout.closeDrawers()
                     when (menuItem.itemId) {
                         R.id.menu_login -> {
-                            findNavController(R.id.fragment_container).navigate(R.id.fragment_login)
+                            findNavController(R.id.fragment_container).navigate(R.id.navigation_fragment_login)
                         }
                         R.id.menu_favorite -> {
-                            findNavController(R.id.fragment_container).navigate(R.id.fragment_favorite)
+                            findNavController(R.id.fragment_container).navigate(R.id.navigation_fragment_favorite)
                         }
                         R.id.menu_setting -> {
-                            findNavController(R.id.fragment_container).navigate(R.id.fragment_setting)
+                            findNavController(R.id.fragment_container).navigate(R.id.navigation_fragment_setting)
                         }
                         R.id.menu_about -> {
-                            findNavController(R.id.fragment_container).navigate(R.id.fragment_about)
+                            findNavController(R.id.fragment_container).navigate(R.id.navigation_fragment_about)
                         }
                         R.id.menu_logout -> {
 
@@ -107,8 +108,9 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        findNavController(R.id.fragment_container).currentDestination?.let {
-            if (it.id != R.id.fragment_main) {
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        fragment.navController.currentDestination?.let {
+            if (it.id != R.id.navigation_fragment_main) {
                 mBinding.navigationView.menu.forEach { menuItem ->
                     menuItem.isChecked = menuItem.itemId == R.id.menu_setting
                 }
@@ -122,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             Navigation.findNavController(
                 this,
                 R.id.fragment_container
-            ).currentDestination?.id == R.id.fragment_search -> return super.onOptionsItemSelected(
+            ).currentDestination?.id == R.id.navigation_fragment_search -> return super.onOptionsItemSelected(
                 item
             )
             item.itemId == R.id.id_search -> {
@@ -162,7 +164,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         EventBus.getDefault().unregister(this)
-        drawerLayout.removeDrawerListener(mDrawerListener)
+        mBinding.drawerLayout.removeDrawerListener(mDrawerListener)
         super.onDestroy()
     }
 
@@ -173,7 +175,7 @@ class MainActivity : AppCompatActivity() {
                 mBinding.drawerLayout.closeDrawer(GravityCompat.START)
                 mBinding.bottomNavigationView.visibility = View.VISIBLE
             }
-            id != R.id.fragment_main -> {
+            id != R.id.navigation_fragment_main -> {
                 findNavController(R.id.fragment_container).navigate(R.id.action_main)
                 mBinding.navigationView.menu.forEach { it.isChecked = false }
                 mBinding.bottomNavigationView.visibility = View.VISIBLE

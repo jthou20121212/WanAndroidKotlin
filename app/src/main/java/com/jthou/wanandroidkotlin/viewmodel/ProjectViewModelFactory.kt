@@ -13,7 +13,7 @@ import com.jthou.wanandroidkotlin.repository.ProjectRepository
  */
 class ProjectViewModelFactory(private val repository : ProjectRepository) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ProjectViewModel(repository) as T
     }
 
